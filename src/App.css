@@ -1,38 +1,213 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+/* === General App Container === */
+.app {
+  max-width: 850px;
   min-height: 100vh;
+  margin: 0 auto;
+  padding: 25px;
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+  background: linear-gradient(135deg, #2a9d8f, #264653);
+  border-radius: 20px;
+  box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.3);
+
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  position: relative;
+  perspective: 1200px;
+  overflow: hidden;
 }
 
-.App-link {
-  color: #61dafb;
+/* === Floating Background Animation === */
+.app::before,
+.app::after {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  top: -150px;
+  right: -100px;
+  filter: blur(100px);
+  animation: float 6s ease-in-out infinite alternate;
+}
+.app::after {
+  top: auto;
+  bottom: -150px;
+  left: -100px;
+  background: rgba(255, 255, 255, 0.05);
+  animation-delay: 3s;
 }
 
-@keyframes App-logo-spin {
+@keyframes float {
   from {
-    transform: rotate(0deg);
+    transform: translateY(0px);
   }
   to {
-    transform: rotate(360deg);
+    transform: translateY(40px);
   }
+}
+
+/* === Logo === */
+.app h1 {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+  transform: rotateX(10deg);
+}
+
+/* === Form === */
+.addform {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  margin-bottom: 30px;
+  border-radius: 15px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-align: center;
+  color: #fff;
+  backdrop-filter: blur(12px);
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.25);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+
+  transform: rotateX(5deg);
+  transition: transform 0.3s ease;
+}
+.addform:hover {
+  transform: rotateX(0deg) scale(1.02);
+}
+
+.addform select,
+.addform input,
+.addform button {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  font-size: 1rem;
+  outline: none;
+}
+
+.addform select,
+.addform input {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.addform input::placeholder {
+  color: #ddd;
+}
+
+.addform button {
+  background: linear-gradient(135deg, #e76f51, #f4a261);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+}
+.addform button:hover {
+  transform: scale(1.1) rotate(-2deg);
+}
+
+/* === Packing List === */
+.List {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 20px;
+  border-radius: 15px;
+  backdrop-filter: blur(12px);
+  box-shadow: inset 0px 2px 6px rgba(255, 255, 255, 0.15);
+}
+
+.List ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+/* === Items === */
+.List li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  color: #fff;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  transform: rotateY(8deg);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+.List li:hover {
+  transform: rotateY(0deg) scale(1.05);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* === Checkbox === */
+.List input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #2a9d8f;
+  cursor: pointer;
+  transform: scale(1);
+  transition: transform 0.2s ease;
+}
+.List input[type="checkbox"]:hover {
+  transform: scale(1.2);
+}
+
+/* === Delete Button === */
+.List button {
+  background: transparent;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: transform 0.2s, color 0.2s;
+  color: #ff6666;
+}
+.List button:hover {
+  transform: scale(1.3) rotate(10deg);
+  color: #ff1e1e;
+}
+
+/* === Packed Item Style === */
+.packed label {
+  text-decoration: line-through;
+  opacity: 0.7;
+  color: #ddd;
+  transition: all 0.3s ease;
+}
+
+/* === Footer / Stats === */
+footer {
+  margin-top: auto;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 18px;
+  border-radius: 15px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  box-shadow: 0px -5px 20px rgba(0, 0, 0, 0.2);
+  transform: rotateX(5deg);
+  transition: transform 0.3s ease;
+}
+footer:hover {
+  transform: rotateX(0deg) scale(1.02);
+}
+
+footer em {
+  color: #fff;
+  font-size: 1rem;
 }
